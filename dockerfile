@@ -1,5 +1,5 @@
 # Verwende ein Java-OpenJDK-Image als Basis
-FROM openjdk:17-jdk-alpine
+FROM eclipse-temurin:17-jdk-jammy
 
 # Arbeitsverzeichnis
 WORKDIR /app
