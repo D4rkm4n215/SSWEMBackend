@@ -1,13 +1,14 @@
-# Build Stage (Maven + Java)
-FROM maven:3.8.7-eclipse-temurin-17 AS build
-WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
+# Verwende ein Java-OpenJDK-Image als Basis
+FROM openjdk:17-jdk-alpine
 
-# Run Stage (kleines Java-Image)
-FROM eclipse-temurin:17-jdk
+# Arbeitsverzeichnis
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+
+# Kopiere das fertige JAR in das Image
+COPY target/backend-0.0.1-SNAPSHOT.jar app.jar
+
+# Port, den die Spring Boot App nutzt
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# Kommando zum Starten der App
+ENTRYPOINT ["java","-jar","app.jar"]

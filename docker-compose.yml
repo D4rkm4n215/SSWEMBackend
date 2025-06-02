@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
-  spring-api:
+  sswembackend:
+    image: sswembackend
     build: .
-    container_name: springboot-api
     ports:
       - "8080:8080"
     restart: unless-stopped
